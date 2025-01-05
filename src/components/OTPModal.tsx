@@ -13,7 +13,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "./ui/input-otp";
 import { MouseEvent, useState } from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { sentEmailOTP, verifySecret } from "@/lib/actions/user.actions";
+import { sendEmailOTP, verifySecret } from "@/lib/actions/user.actions";
 import { useRouter } from "next/navigation";
 
 export default function OTPModal({ email, accountId }: { email: string; accountId: string }) {
@@ -34,7 +34,7 @@ export default function OTPModal({ email, accountId }: { email: string; accountI
         setIsLoading(false);
     };
 
-    const handleResentOTP = async () => await sentEmailOTP({ email });
+    const handleResentOTP = async () => await sendEmailOTP({ email });
     return (
         <AlertDialog
             open={isOpen}
