@@ -10,9 +10,9 @@ type SideBarProps = {
     fullName: string;
     avatar: string;
     email: string;
-}
+};
 
-export default function Sidebar({ fullName, avatar, email} : SideBarProps) {
+export default function Sidebar({ fullName, avatar, email }: SideBarProps) {
     const pathname = usePathname();
     return (
         <aside className='sidebar'>
@@ -39,6 +39,7 @@ export default function Sidebar({ fullName, avatar, email} : SideBarProps) {
                         <Link
                             href={url}
                             key={name}
+                            className='lg:w-full'
                         >
                             <li
                                 className={cn(
@@ -79,8 +80,8 @@ export default function Sidebar({ fullName, avatar, email} : SideBarProps) {
                     className='sidebar-user-avatar'
                 />
                 <div className='hidden lg:block'>
-                    <p className='subtitle-2 capitalize'>{ fullName } </p>
-                    <p className='caption'>{ email } </p>
+                    <p className='subtitle-2 capitalize'>{fullName} </p>
+                    <p className='caption'>{email} </p>
                 </div>
             </div>
         </aside>

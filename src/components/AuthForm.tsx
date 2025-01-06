@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { createAccount } from "@/lib/actions/user.actions";
+import { createAccount, signInUser } from "@/lib/actions/user.actions";
 import OTPModal from "./OTPModal";
 
 type FormType = "sign-in" | "sign-up";
@@ -36,10 +36,13 @@ export default function AuthForm({ type }: { type: FormType }) {
         setIsLoading(true);
         setErrorMessage("");
         try {
-            const user = await createAccount({
-                fullName: values.fullName || "",
-                email: values.email,
-            });
+            const user =
+                type === "sign-in"
+                    ? await signInUser({ email: values.email })
+                    : await createAccount({
+                          fullName: values.fullName || "",
+                          email: values.email,
+                      });
             setAccountId(user.accountId);
         } catch {
             setErrorMessage("Failed to create account. Please try again");
