@@ -7,6 +7,7 @@ declare type ActionType = {
 };
 
 declare type SearchParamProps = {
+    // eslint-disable-next-line no-undef
     params?: Promise<SegmentParams>;
     searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -68,7 +69,9 @@ declare type ThumbnailProps = {
 };
 
 declare type ShareInputProps = {
+    // eslint-disable-next-line no-undef
     file: Models.Document;
+    // eslint-disable-next-line no-undef
     onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onRemove: (email: string) => void;
 };
