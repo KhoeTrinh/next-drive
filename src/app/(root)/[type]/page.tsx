@@ -1,12 +1,17 @@
 import Card from "@/components/Card";
-import Sort from "@/components/Sort ";
+import Sort from "@/components/Sort";
 import { getFiles } from "@/lib/actions/file.actions";
+import { getFileTypesParams } from "@/lib/utils";
 import { Models } from "node-appwrite";
 
 // eslint-disable-next-line no-undef
-export default async function Page({ params }: SearchParamProps) {
+export default async function Page({ params, searchParams }: SearchParamProps) {
     const type = ((await params)?.type as string) || "";
-    const files = await getFiles();
+    const searchText = ((await searchParams)?.query as string) || "";
+    const sort = ((await searchParams)?.sort as string) || "";
+    // eslint-disable-next-line no-undef
+    const types = getFileTypesParams(type) as FileType[];
+    const files = await getFiles({ types, searchText, sort });
     return (
         <div className='page-container'>
             <section className='w-full'>
@@ -15,6 +20,7 @@ export default async function Page({ params }: SearchParamProps) {
                     <p className='body-1'>
                         Total: <span className='h5'>0 MB</span>
                     </p>
+
                     <div className='sort-container'>
                         <p className='body-1 hidden text-light-200 sm:block'>Sort by:</p>
                         <Sort />
@@ -24,7 +30,10 @@ export default async function Page({ params }: SearchParamProps) {
             {files.total > 0 ? (
                 <section className='file-list'>
                     {files.documents.map((file: Models.Document) => (
-                        <Card key={file.$id} file={file} />
+                        <Card
+                            key={file.$id}
+                            file={file}
+                        />
                     ))}
                 </section>
             ) : (

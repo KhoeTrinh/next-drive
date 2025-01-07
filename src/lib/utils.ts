@@ -108,7 +108,8 @@ export const formatDateTime = (isoString: string | null | undefined) => {
     return `${time}, ${day} ${month}`;
 };
 
-export const getFileIcon = (extension: string | undefined, type: string) => {
+// eslint-disable-next-line no-undef
+export const getFileIcon = (extension: string | undefined, type: FileType | string) => {
     switch (extension) {
         // Document
         case "pdf":
